@@ -16,7 +16,12 @@ async def start(message: types.Message):
 
 @dp.message_handler()
 async def msg(message: types.Message):
-    await bot.send_message(CHANNEL, message.text)
+    if message.text:
+        if "some_anon_chat/" in message.text.split("\n")[0]:
+            await bot.copy_message(CHANNEL, message.chat.id, message.message_id,
+                parse_mode="MarkdownV2", reply_to_message_id=int(message.text.split("\n")[0].split("/")[-1]))
+        else:
+            await bot.copy_message(CHANNEL, message.chat.id, message.message_id, parse_mode="MarkdownV2")
 
 logging.info(f"Token: {TOKEN}")
 logging.info(f"Channel: {CHANNEL}")
