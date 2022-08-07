@@ -22,6 +22,8 @@ async def msg(message: types.Message):
                 "MarkdownV2", reply_to_message_id=int(message.text.split("\n")[0].split("/")[-1]))
         else:
             await bot.send_message(CHANNEL, message.text, "MarkdownV2")
+    if message.sticker:
+        await bot.send_sticker(CHANNEL, message.sticker)
 
 logging.info(f"Token: {TOKEN}")
 logging.info(f"Channel: {CHANNEL}")
