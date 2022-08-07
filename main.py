@@ -23,7 +23,7 @@ async def msg(message: types.Message):
         else:
             await bot.send_message(CHANNEL, message.text, "MarkdownV2")
     if message.sticker:
-        await bot.send_sticker(CHANNEL, message.sticker)
+        await bot.send_sticker(CHANNEL, str(message.sticker))
 
 logging.info(f"Token: {TOKEN}")
 logging.info(f"Channel: {CHANNEL}")
