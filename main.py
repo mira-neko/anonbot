@@ -23,12 +23,20 @@ async def start(message: types.Message):
 async def msg(message: types.Message):
     if message.text:
         if (CHANNEL[1:] + "/") in message.text.split("\n")[0]:
-            await bot.send_message(CHANNEL, escape("\n".join(message.text.split("\n")[1:])),
-                "MarkdownV2", reply_to_message_id=int(message.text.split("\n")[0].split("/")[-1]))
+            text = escape("\n".join(message.text.split("\n")[1:]))
+            reply = int(message.text.split("\n")[0].split("/")[-1])
         else:
-            await bot.send_message(CHANNEL, escape(message.text), "MarkdownV2")
-    if message.sticker:
-        await bot.send_sticker(CHANNEL, str(message.sticker))
+            text = escape("\n".join(message.text.split("\n")[1:]))
+            reply = None
+    else:
+        text = None
+        reply = None
+    if message.photo:
+        await bot.send_photo(CHANNEL, message.photo, text, "MarkdownV2", reply_to_message_id=reply)
+    elif message.text:
+        await bot.send_message(CHANNEL, text, "MarkdownV2", reply_to_message_id=reply)
+    elif message.sticker:
+        await bot.send_sticker(CHANNEL, message.sticker)
 
 logging.info(f"Token: {TOKEN}")
 logging.info(f"Channel: {CHANNEL}")
