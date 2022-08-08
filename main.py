@@ -11,7 +11,7 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 def escape(s):
-    for c in "\\/.,:;'\"/*-+~`":
+    for c in "\\.,:;'\"/*-+~`":
         s = s.replace(c, "\\" + c)
     return s
 
