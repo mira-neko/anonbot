@@ -30,7 +30,7 @@ async def msg(message: types.Message):
             reply = int(message.text.split("\n")[0].split("/")[-1])
         else:
             logging.info(f"Message: *not reply*")
-            text = escape("\n".join(message.text.split("\n")[1:]))
+            text = escape(message.text)
             reply = None
     else:
         logging.info(f"Message: *not text*")
