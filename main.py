@@ -11,7 +11,9 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
 def escape(s):
-    return "\\" + "\\".join([c for c in s])
+    for c in "\\/.,:;'\"/*-+~`":
+        s = s.replace(c, "\\" + c)
+    return s
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
